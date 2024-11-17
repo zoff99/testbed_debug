@@ -52,6 +52,9 @@ fun shrink_image_file()
     {
         val ff1 = File(RESOURCESDIR.canonicalPath + "/" + "background.jpg")
         val ff2 = File("/tmp/aa.webp")
+        println("input file: " + ff1.absolutePath)
+        println("input file exists?: " + ff1.exists())
+        println("output file: " + ff2.absolutePath)
         try
         {
             ff2.delete()
