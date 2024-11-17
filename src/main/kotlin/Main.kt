@@ -16,6 +16,7 @@ import androidx.compose.ui.window.application
 import com.sksamuel.scrimage.ImmutableImage
 import com.sksamuel.scrimage.webp.WebpWriter
 import java.io.File
+import java.lang.Exception
 
 @Composable
 @Preview
@@ -51,6 +52,14 @@ fun shrink_image_file()
     {
         val ff1 = File(RESOURCESDIR.canonicalPath + "/" + "background.jpg")
         val ff2 = File("/tmp/aa.webp")
+        try
+        {
+            ff2.delete()
+            // delete file to make sure its not from a previous run
+        }
+        catch(_: Exception)
+        {
+        }
         var new_len = ff1.length()
         val max_width = 800
         val qualityies = intArrayOf(70, 50, 30, 10, 4, 2, 1, 0)
@@ -58,7 +67,7 @@ fun shrink_image_file()
         val quality = qualityies[count]
         ImmutableImage.loader().fromFile(ff1).scaleToWidth(max_width).output(WebpWriter().withQ(quality), ff2.canonicalPath)
     }
-    catch (e: java.lang.Exception)
+    catch (e: Exception)
     {
         e.printStackTrace()
     }
